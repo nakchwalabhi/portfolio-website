@@ -2,7 +2,7 @@
 ![screenshot](https://github.com/user-attachments/assets/e7352310-e655-4fd0-b72f-6a89f022ff3d)
 
 
-## Live Demo : https://nakchwal.netlify.com
+## Live Demo : https://nakchwal.netlify.app
 This repository contains the source code and files for my personal portfolio website. The website is built using HTML, CSS, and JavaScript.
 
 ## Description
