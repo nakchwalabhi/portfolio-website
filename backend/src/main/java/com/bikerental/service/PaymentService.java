@@ -78,9 +78,7 @@ public class PaymentService {
                 throw new BadRequestException("Invalid payment signature");
             }
 
-            Booking booking = bookingRepository.findAll().stream()
-                    .filter(b -> request.getRazorpayOrderId().equals(b.getRazorpayOrderId()))
-                    .findFirst()
+            Booking booking = bookingRepository.findByRazorpayOrderId(request.getRazorpayOrderId())
                     .orElseThrow(() -> new ResourceNotFoundException("Booking not found for this order"));
 
             booking.setRazorpayPaymentId(request.getRazorpayPaymentId());
