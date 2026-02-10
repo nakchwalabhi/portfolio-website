@@ -71,9 +71,8 @@ export const addVehicle = (data) =>
   });
 
 export const updateAvailability = (vehicleId, available) =>
-  request(`/vehicles/${vehicleId}/availability`, {
-    method: 'PATCH',
-    body: JSON.stringify({ available }),
+  request(`/vehicles/${vehicleId}/availability?available=${available}`, {
+    method: 'PUT',
   });
 
 // Bookings
@@ -88,9 +87,8 @@ export const getMyBookings = () => request('/bookings/my');
 export const getVendorBookings = () => request('/bookings/vendor');
 
 export const updateBookingStatus = (bookingId, status) =>
-  request(`/bookings/${bookingId}/status`, {
-    method: 'PATCH',
-    body: JSON.stringify({ status }),
+  request(`/bookings/${bookingId}/status?status=${status}`, {
+    method: 'PUT',
   });
 
 // Payments
