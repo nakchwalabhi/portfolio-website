@@ -43,13 +43,13 @@ export default function ShopListScreen({ navigation }) {
   const renderShop = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('VehicleList', { shopId: item.id, shopName: item.name })}
+      onPress={() => navigation.navigate('VehicleList', { shopId: item.id, shopName: item.shopName })}
     >
       <View style={styles.cardIcon}>
         <Ionicons name="storefront-outline" size={28} color="#2563EB" />
       </View>
       <View style={styles.cardContent}>
-        <Text style={styles.shopName}>{item.name}</Text>
+        <Text style={styles.shopName}>{item.shopName}</Text>
         <View style={styles.infoRow}>
           <Ionicons name="location-outline" size={14} color="#6B7280" />
           <Text style={styles.shopAddress}>{item.address || 'No address provided'}</Text>

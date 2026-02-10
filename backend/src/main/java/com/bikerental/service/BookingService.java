@@ -48,8 +48,8 @@ public class BookingService {
         }
 
         long days = ChronoUnit.DAYS.between(request.getStartDate(), request.getEndDate());
-        if (days <= 0) {
-            days = 1; // Minimum 1 day
+        if (days == 0) {
+            days = 1; // Same-day rental counts as 1 day
         }
 
         BigDecimal totalPrice = vehicle.getPricePerDay().multiply(BigDecimal.valueOf(days));

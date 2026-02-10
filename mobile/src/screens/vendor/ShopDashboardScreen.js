@@ -26,6 +26,8 @@ export default function ShopDashboardScreen({ navigation }) {
   const [shopName, setShopName] = useState('');
   const [shopAddress, setShopAddress] = useState('');
   const [shopPhone, setShopPhone] = useState('');
+  const [shopLatitude, setShopLatitude] = useState('');
+  const [shopLongitude, setShopLongitude] = useState('');
   const [creating, setCreating] = useState(false);
 
   useFocusEffect(
@@ -65,17 +67,18 @@ export default function ShopDashboardScreen({ navigation }) {
     setCreating(true);
     try {
       await createShop({
-        name: shopName.trim(),
+        shopName: shopName.trim(),
         address: shopAddress.trim(),
-        phone: shopPhone.trim(),
-        latitude: 0.0,
-        longitude: 0.0,
+        latitude: parseFloat(shopLatitude) || 30.3165,
+        longitude: parseFloat(shopLongitude) || 78.0322,
       });
       Alert.alert('Success', 'Shop created successfully!');
       setShowCreateForm(false);
       setShopName('');
       setShopAddress('');
       setShopPhone('');
+      setShopLatitude('');
+      setShopLongitude('');
       fetchData();
     } catch (error) {
       Alert.alert('Error', error.message);
@@ -145,7 +148,7 @@ export default function ShopDashboardScreen({ navigation }) {
               <View key={shop.id} style={styles.shopCard}>
                 <View style={styles.shopHeader}>
                   <Ionicons name="storefront" size={24} color="#2563EB" />
-                  <Text style={styles.shopName}>{shop.name}</Text>
+                  <Text style={styles.shopName}>{shop.shopName}</Text>
                 </View>
                 <View style={styles.shopInfoRow}>
                   <Ionicons name="location-outline" size={14} color="#6B7280" />
@@ -186,6 +189,26 @@ export default function ShopDashboardScreen({ navigation }) {
               value={shopPhone}
               onChangeText={setShopPhone}
               keyboardType="phone-pad"
+            />
+
+            <Text style={styles.label}>Latitude (default: Dehradun)</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. 30.3165"
+              placeholderTextColor="#9CA3AF"
+              value={shopLatitude}
+              onChangeText={setShopLatitude}
+              keyboardType="decimal-pad"
+            />
+
+            <Text style={styles.label}>Longitude (default: Dehradun)</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. 78.0322"
+              placeholderTextColor="#9CA3AF"
+              value={shopLongitude}
+              onChangeText={setShopLongitude}
+              keyboardType="decimal-pad"
             />
 
             <View style={styles.formButtons}>

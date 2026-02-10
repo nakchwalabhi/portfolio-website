@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -10,10 +10,12 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { AuthContext } from '../../context/AuthContext';
 import { createPaymentOrder, verifyPayment } from '../../services/api';
 
 export default function PaymentScreen({ route, navigation }) {
   const { bookingId, totalPrice, advanceAmount, vehicleName } = route.params;
+  const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
   const handlePayment = async () => {
@@ -54,8 +56,9 @@ export default function PaymentScreen({ route, navigation }) {
         name: 'Bike Rental',
         order_id: order.orderId,
         prefill: {
-          email: 'user@example.com',
-          contact: '9999999999',
+          email: user?.email || '',
+          contact: '',
+          name: user?.name || '',
         },
         theme: { color: '#2563EB' },
       };
